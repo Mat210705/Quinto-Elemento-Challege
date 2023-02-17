@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import quinto.elemento.prueba.model.Profesor;
 import quinto.elemento.prueba.repository.ProfesorRepository;
@@ -21,5 +22,10 @@ public class ProfessorController {
     @GetMapping(path = "/profesores")
     public List<Profesor> getAllProfesor(){
         return profesorService.getAllProfesor();
+    }
+
+    @GetMapping(path = "profesores{nombre}")
+    public Profesor getProfesorByName(String nombre){
+        return profesorService.getProfesorByName(nombre);
     }
 }
