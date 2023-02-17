@@ -14,5 +14,7 @@ public interface ProfesorService {
 
     ResponseEntity<?> createProfesor(ProfesorDTO profesorDTO);
 
-    ResponseEntity<?> editarProfesor(String nombre,String apellido, String email, String password,ProfesorDTO profesorDTO);
+
+
+    ResponseEntity editarProfesor(int id, ProfesorDTO profesorDTO);
 }

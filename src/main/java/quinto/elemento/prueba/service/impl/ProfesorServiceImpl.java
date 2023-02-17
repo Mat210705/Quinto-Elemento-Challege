@@ -32,7 +32,7 @@ public class ProfesorServiceImpl implements ProfesorService {
     @Override
     public ResponseEntity<?> createProfesor(ProfesorDTO profesorDTO) {
             if (profesorDTO.getNombre().isEmpty()|| profesorDTO.getApellido().isEmpty()||profesorDTO.getEmail().isEmpty()|| profesorDTO.getPassword().isEmpty()){
-                return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("Faltan datos para realizar la operacion", HttpStatus.FORBIDDEN);
             }
         Profesor newProfesor = new Profesor();
             newProfesor.setNombre(profesorDTO.getNombre());
@@ -43,9 +43,19 @@ public class ProfesorServiceImpl implements ProfesorService {
         return new ResponseEntity<>("El Profesor a sido creado correctamente", HttpStatus.CREATED);
     }
 
+
+
     @Override
-    public ResponseEntity<?> editarProfesor(String nombre, String apellido, String email, String password, ProfesorDTO profesorDTO) {
-        return null;
+    public ResponseEntity<?> editarProfesor(int id, ProfesorDTO profesorDTO) {
+
+        Profesor editProfesor = profesorRepository.findById(id);
+            editProfesor.setNombre(profesorDTO.getNombre());
+            editProfesor.setApellido(profesorDTO.getApellido());
+            editProfesor.setEmail(profesorDTO.getEmail());
+            editProfesor.setPassword(profesorDTO.getPassword());
+        profesorRepository.save(editProfesor);
+        return new ResponseEntity<>("El Profesor a sido editado correctamente", HttpStatus.OK);
+
     }
 
 

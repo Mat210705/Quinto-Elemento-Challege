@@ -30,6 +30,10 @@ public class ProfessorController {
     public ResponseEntity<?> createProfesor(@RequestBody ProfesorDTO profesorDTO){
         return profesorService.createProfesor(profesorDTO);
     }
+    @PutMapping(path = "/editar/profesor")
+    public ResponseEntity<?> editarProfesor(@RequestParam int id,@RequestBody ProfesorDTO profesorDTO){
+        return profesorService.editarProfesor(id, profesorDTO);
+    }
 }
 
 

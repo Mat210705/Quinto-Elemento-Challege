@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import quinto.elemento.prueba.dto.ProfesorDTO;
 import quinto.elemento.prueba.model.Profesor;
+import quinto.elemento.prueba.repository.ProfesorRepository;
 
 import java.util.List;
 
@@ -17,7 +18,8 @@ public class ProfesorServiceImplTest {
 
     @Autowired
     private ProfesorServiceImpl profesorServiceImpl;
-
+    @Autowired
+    private ProfesorRepository profesorRepository;
     @Test
     public void obtenerTodosLosProfesores(){
         List<Profesor> profesores = profesorServiceImpl.getAllProfesor();
@@ -49,5 +51,23 @@ public class ProfesorServiceImplTest {
         profesor.setPassword("1234");
         ResponseEntity<?> profesorCreado = profesorServiceImpl.createProfesor(profesor);
         assertThat(profesorCreado).isNotNull();
+    }
+
+    @Test
+    public void editarProfesor(){
+        int id = 1;
+            ProfesorDTO profesorDTO = new ProfesorDTO();
+            profesorDTO.setNombre("Matias");
+            profesorDTO.setApellido("Milich");
+            profesorDTO.setEmail("Matias123@gmail.com");
+            profesorDTO.setPassword("1234");
+        Profesor profesor = profesorRepository.findById(id);
+            profesor.setNombre(profesorDTO.getNombre());
+            profesor.setApellido(profesorDTO.getApellido());
+            profesor.setEmail(profesorDTO.getEmail());
+            profesor.setPassword(profesorDTO.getPassword());
+        ResponseEntity<?> profesorCreado = profesorServiceImpl.editarProfesor(id, profesorDTO);
+        assertThat(profesorCreado).isNotNull();
+        assertThat(profesor.getId()).isEqualTo(id);
     }
 }
