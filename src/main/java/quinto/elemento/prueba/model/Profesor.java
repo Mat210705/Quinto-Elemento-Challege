@@ -1,19 +1,16 @@
 package quinto.elemento.prueba.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 //Anotaciones Lombok
 
-@Getter
-@Setter
+
 @Entity
 public class Profesor {
 
@@ -26,20 +23,75 @@ public class Profesor {
     private String apellido;
     private String email;
     private String password;
-    private Curso curso;
-    private Turno turno;
+
+
+    @OneToMany(mappedBy="profesor", fetch= FetchType.EAGER)
+    Set<Curso> cursos = new HashSet<>();
 
 
     public Profesor() {
 
     }
 
-    public Profesor(String nombre, String apellido, String email, String password, Curso curso, Turno turno) {
+    public Profesor(String nombre, String apellido, String email, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
-        this.curso = curso;
-        this.turno = turno;
+    }
+
+    public Set<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void addCursos(Curso curso) {
+        curso.setProfesor(this);
+        cursos.add(curso);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    public void setCursos(Set<Curso> cursos) {
+        this.cursos = cursos;
     }
 }
+

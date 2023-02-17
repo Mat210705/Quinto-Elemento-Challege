@@ -7,4 +7,6 @@ import java.util.List;
 public interface ProfesorService {
 
     List<Profesor> getAllProfesor();
+
+    Profesor getProfesorByName(String nombre);
 }
