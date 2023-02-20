@@ -58,5 +58,10 @@ public class ProfesorServiceImpl implements ProfesorService {
 
     }
 
-
+    @Override
+    public ResponseEntity<?> eliminarProfesor(int id) {
+        Profesor profesor = profesorRepository.findById(id);
+        profesorRepository.delete(profesor);
+        return new ResponseEntity<>("Profesor eliminado correctamente",HttpStatus.OK);
+    }
 }

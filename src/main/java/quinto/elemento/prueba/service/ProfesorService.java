@@ -14,7 +14,7 @@ public interface ProfesorService {
 
     ResponseEntity<?> createProfesor(ProfesorDTO profesorDTO);
 
-
-
     ResponseEntity editarProfesor(int id, ProfesorDTO profesorDTO);
+
+    ResponseEntity eliminarProfesor(int id);
 }

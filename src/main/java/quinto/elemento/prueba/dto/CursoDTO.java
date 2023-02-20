@@ -1,29 +1,29 @@
-package quinto.elemento.prueba.model;
+package quinto.elemento.prueba.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.GenericGenerator;
+import quinto.elemento.prueba.model.Profesor;
 
-import javax.persistence.*;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@Entity
-public class Curso {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
+public class CursoDTO {
+
     private Integer id;
 
     private String nombre;
 
     private String turno;
 
+    public CursoDTO() {
+    }
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="profesor_id")
     private Profesor profesor;
 
-    public Curso() {
-    }
 
-    public Curso(String nombre, String turno) {
+    public CursoDTO(Integer id, String nombre, String turno) {
+        this.id = id;
         this.nombre = nombre;
         this.turno = turno;
     }
@@ -35,7 +35,6 @@ public class Curso {
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
-
     public Integer getId() {
         return id;
     }
@@ -48,8 +47,8 @@ public class Curso {
         return nombre;
     }
 
-    public void setNombre(String name) {
-        this.nombre = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTurno() {

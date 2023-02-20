@@ -34,6 +34,10 @@ public class ProfessorController {
     public ResponseEntity<?> editarProfesor(@RequestParam int id,@RequestBody ProfesorDTO profesorDTO){
         return profesorService.editarProfesor(id, profesorDTO);
     }
+    @DeleteMapping(path = "/eliminar/profesor")
+    public ResponseEntity<?> eliminarProfesor(@RequestParam int id){
+        return profesorService.eliminarProfesor(id);
+    }
 }
 
 

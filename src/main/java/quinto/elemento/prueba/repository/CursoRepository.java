@@ -6,4 +6,7 @@ import quinto.elemento.prueba.model.Curso;
 
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Integer> {
+    Curso findByNombre(String nombre);
+
+    Curso findById(int id);
 }
