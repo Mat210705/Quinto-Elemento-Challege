@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import quinto.elemento.prueba.dto.ProfesorDTO;
+import quinto.elemento.prueba.model.Curso;
 import quinto.elemento.prueba.model.Profesor;
+import quinto.elemento.prueba.repository.CursoRepository;
 import quinto.elemento.prueba.repository.ProfesorRepository;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class ProfesorServiceImplTest {
     private ProfesorServiceImpl profesorServiceImpl;
     @Autowired
     private ProfesorRepository profesorRepository;
+    @Autowired
+    private CursoRepository cursoRepository;
     @Test
     public void obtenerTodosLosProfesores(){
         List<Profesor> profesores = profesorServiceImpl.getAllProfesor();
@@ -91,4 +95,18 @@ public class ProfesorServiceImplTest {
 //        profesorServiceImpl.eliminarProfesor(profesor.getId());
 //        assertThat(profesorRepository.count()).isEqualTo(1);
 //    }
+    @Test
+    public void anotarseACurso(){
+        int id= 1;
+        String nombre= "Sql-Inicial";
+        String turno= "Noche";
+        Profesor profesor = profesorRepository.findById(id);
+        Curso curso = new Curso();
+        curso.setNombre(nombre);
+        curso.setTurno(turno);
+        profesor.addCursos(curso);
+        cursoRepository.save(curso);
+        ResponseEntity<?> cursoAnotado = profesorServiceImpl.anotarseACurso(id,nombre,turno);
+        assertThat(cursoAnotado).isNotNull();
+    }
 }

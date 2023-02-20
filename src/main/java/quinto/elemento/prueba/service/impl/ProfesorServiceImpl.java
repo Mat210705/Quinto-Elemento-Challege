@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import quinto.elemento.prueba.dto.ProfesorDTO;
+import quinto.elemento.prueba.model.Curso;
 import quinto.elemento.prueba.model.Profesor;
+import quinto.elemento.prueba.repository.CursoRepository;
 import quinto.elemento.prueba.repository.ProfesorRepository;
 import quinto.elemento.prueba.service.ProfesorService;
 
@@ -18,7 +20,8 @@ public class ProfesorServiceImpl implements ProfesorService {
 
     @Autowired
     ProfesorRepository profesorRepository;
-
+    @Autowired
+    CursoRepository cursoRepository;
     @Override
     public List<Profesor> getAllProfesor(){
         return profesorRepository.findAll();
@@ -63,5 +66,17 @@ public class ProfesorServiceImpl implements ProfesorService {
         Profesor profesor = profesorRepository.findById(id);
         profesorRepository.delete(profesor);
         return new ResponseEntity<>("Profesor eliminado correctamente",HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> anotarseACurso(int id, String nombre, String turno){
+       Profesor profesor = profesorRepository.findById(id);
+       Curso curso = new Curso();
+       curso.setNombre(nombre);
+       curso.setTurno(turno);
+       profesor.addCursos(curso);
+       cursoRepository.save(curso);
+       return new ResponseEntity<>("Se a anotado al curso Correctamente", HttpStatus.OK);
+
     }
 }

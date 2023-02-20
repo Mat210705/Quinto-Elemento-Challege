@@ -1,18 +1,11 @@
 package quinto.elemento.prueba.model;
 
-
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
-//Anotaciones Lombok
-
 
 @Entity
-public class Profesor {
-
+public class Alumno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -23,42 +16,17 @@ public class Profesor {
     private String email;
     private String password;
 
-
-    @OneToMany(mappedBy="profesor", fetch= FetchType.EAGER)
-    Set<Curso> cursos = new HashSet<>();
-    @OneToMany(mappedBy="profesor", fetch= FetchType.EAGER)
-    Set<Alumno> alumnos = new HashSet<>();
-
-    public Profesor() {
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="profesor_id")
+    private Profesor profesor;
+    public Alumno() {
     }
 
-    public Profesor(String nombre, String apellido, String email, String password) {
+    public Alumno(String nombre, String apellido, String email, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
-    }
-
-    public Set<Alumno> getAlumnos() {
-        return alumnos;
-    }
-
-    public void setAlumnos(Set<Alumno> alumnos) {
-        this.alumnos = alumnos;
-    }
-    public void addAlumnos(Alumno alumno) {
-        alumno.setProfesor(this);
-        alumnos.add(alumno);
-    }
-
-    public Set<Curso> getCursos() {
-        return cursos;
-    }
-
-    public void addCursos(Curso curso) {
-        curso.setProfesor(this);
-        cursos.add(curso);
     }
 
     public Integer getId() {
@@ -101,9 +69,11 @@ public class Profesor {
         this.password = password;
     }
 
+    public Profesor getProfesor() {
+        return profesor;
+    }
 
-    public void setCursos(Set<Curso> cursos) {
-        this.cursos = cursos;
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
     }
 }
-

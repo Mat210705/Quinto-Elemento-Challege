@@ -30,6 +30,10 @@ public class PruebaApplication {
 				Curso javaInicial = new Curso("Java-Inicial", "tarde");
 				profesor1.addCursos(javaInicial);
 				cursoRepository.save(javaInicial);
+				Curso javascriptInicial = new Curso("Javascript-Inicial", "Noche");
+				cursoRepository.save(javascriptInicial);
+				Curso sqlInicial = new Curso("Sql-Inicial", "Noche");
+				cursoRepository.save(sqlInicial);
 			};
 		}
 	}

@@ -38,6 +38,10 @@ public class ProfessorController {
     public ResponseEntity<?> eliminarProfesor(@RequestParam int id){
         return profesorService.eliminarProfesor(id);
     }
+    @PostMapping(path = "/profesor/anotarse/curso")
+    public ResponseEntity<?> anotarseACurso(@RequestParam int id,@RequestParam String nombre,@RequestParam String turno){
+        return profesorService.anotarseACurso(id, nombre, turno);
+    }
 }
 
 
