@@ -3,6 +3,8 @@ package quinto.elemento.prueba.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Alumno {
@@ -19,6 +21,9 @@ public class Alumno {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="profesor_id")
     private Profesor profesor;
+
+    @OneToMany(mappedBy="alumno", fetch= FetchType.EAGER)
+    Set<Curso> cursos = new HashSet<>();
     public Alumno() {
     }
 
@@ -28,7 +33,14 @@ public class Alumno {
         this.email = email;
         this.password = password;
     }
+    public Set<Curso> getCursos() {
+        return cursos;
+    }
 
+    public void addCursos(Curso curso) {
+        curso.setAlumno(this);
+        cursos.add(curso);
+    }
     public Integer getId() {
         return id;
     }

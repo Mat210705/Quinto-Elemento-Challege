@@ -20,6 +20,9 @@ public class Curso {
     @JoinColumn(name="profesor_id")
     private Profesor profesor;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="alumno_id")
+    private Alumno alumno;
     public Curso() {
     }
 
@@ -34,6 +37,14 @@ public class Curso {
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
+    }
+    @JsonIgnore
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
     public Integer getId() {
