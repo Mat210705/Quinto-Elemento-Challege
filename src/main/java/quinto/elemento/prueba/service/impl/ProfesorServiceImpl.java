@@ -22,6 +22,9 @@ public class ProfesorServiceImpl implements ProfesorService {
     ProfesorRepository profesorRepository;
     @Autowired
     CursoRepository cursoRepository;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<Profesor> getAllProfesor(){
         return profesorRepository.findAll();
@@ -79,4 +82,6 @@ public class ProfesorServiceImpl implements ProfesorService {
        return new ResponseEntity<>("Se a anotado al curso Correctamente", HttpStatus.OK);
 
     }
+
+//
 }

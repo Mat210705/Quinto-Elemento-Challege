@@ -5,9 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import quinto.elemento.prueba.model.Alumno;
-import quinto.elemento.prueba.model.Curso;
-import quinto.elemento.prueba.model.Profesor;
+import quinto.elemento.prueba.model.*;
+import quinto.elemento.prueba.repository.AdministratorRepository;
 import quinto.elemento.prueba.repository.AlumnoRepository;
 import quinto.elemento.prueba.repository.CursoRepository;
 import quinto.elemento.prueba.repository.ProfesorRepository;
@@ -20,7 +19,10 @@ public class PruebaApplication {
 	private CursoRepository cursoRepository;
 	@Autowired
 	private AlumnoRepository alumnoRepository;
-
+	@Autowired
+	private AdministratorRepository administratorRepository;
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 	public static void main(String[] args) {
 		SpringApplication.run(PruebaApplication.class, args);
 	}
@@ -28,10 +30,11 @@ public class PruebaApplication {
 		public CommandLineRunner initData() {
 			return (args) -> {
 
-
-				Profesor profesor1 = new Profesor("Matias", "Milich", "Mat123@gmail.com", "1234");
+				Administrator administrator = new Administrator("Matias","Milich","Mat210705@gmail.com","1234", "ADMIN");
+				administratorRepository.save(administrator);
+				Profesor profesor1 = new Profesor("Matias", "Milich", "Mat123@gmail.com", "1234", "PROFESOR");
 				profesorRepository.save(profesor1);
-				Alumno alumno = new Alumno("Milich", "Matias", "mat456@gmail.com","8976");
+				Alumno alumno = new Alumno("Milich", "Matias", "mat456@gmail.com","8976", "ALUMNO");
 				alumnoRepository.save(alumno);
 				Curso javaInicial = new Curso("Java-Inicial", "tarde");
 				profesor1.addCursos(javaInicial);

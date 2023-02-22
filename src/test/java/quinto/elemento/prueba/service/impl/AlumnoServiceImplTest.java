@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import quinto.elemento.prueba.dto.AlumnoDTO;
-import quinto.elemento.prueba.dto.ProfesorDTO;
 import quinto.elemento.prueba.model.Alumno;
 import quinto.elemento.prueba.model.Curso;
-import quinto.elemento.prueba.model.Profesor;
 import quinto.elemento.prueba.repository.AlumnoRepository;
 import quinto.elemento.prueba.repository.CursoRepository;
 

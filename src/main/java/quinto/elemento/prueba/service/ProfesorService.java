@@ -19,4 +19,6 @@ public interface ProfesorService {
     ResponseEntity eliminarProfesor(int id);
 
     ResponseEntity<?> anotarseACurso(int id, String nombre, String turno);
+
+
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 
 
 @Entity
-public class Profesor {
+public class Profesor{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
@@ -23,6 +23,8 @@ public class Profesor {
     private String email;
     private String password;
 
+    private String roleName;
+
 
     @OneToMany(mappedBy="profesor", fetch= FetchType.EAGER)
     Set<Curso> cursos = new HashSet<>();
@@ -33,11 +35,12 @@ public class Profesor {
 
     }
 
-    public Profesor(String nombre, String apellido, String email, String password) {
+    public Profesor(String nombre, String apellido, String email, String password, String roleName) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
+        this.roleName = roleName;
     }
 
     public Set<Alumno> getAlumnos() {
@@ -104,6 +107,16 @@ public class Profesor {
 
     public void setCursos(Set<Curso> cursos) {
         this.cursos = cursos;
+    }
+
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }
 

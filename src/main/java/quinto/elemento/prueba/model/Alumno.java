@@ -17,7 +17,7 @@ public class Alumno {
     private String apellido;
     private String email;
     private String password;
-
+    private String roleName;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="profesor_id")
     private Profesor profesor;
@@ -27,12 +27,14 @@ public class Alumno {
     public Alumno() {
     }
 
-    public Alumno(String nombre, String apellido, String email, String password) {
+    public Alumno(String nombre, String apellido, String email, String password, String roleName) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
+        this.roleName = roleName;
     }
+
     public Set<Curso> getCursos() {
         return cursos;
     }
@@ -87,5 +89,17 @@ public class Alumno {
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public void setCursos(Set<Curso> cursos) {
+        this.cursos = cursos;
     }
 }
