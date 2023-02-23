@@ -8,5 +8,4 @@ import quinto.elemento.prueba.model.Administrator;
 public interface AdministratorRepository extends JpaRepository<Administrator,Integer> {
 
     Administrator findByEmail(String email);
-    Administrator findByEmailAndPassword(String email, String password);
 }

@@ -12,8 +12,9 @@ import quinto.elemento.prueba.repository.AlumnoRepository;
 import quinto.elemento.prueba.repository.ProfesorRepository;
 import quinto.elemento.prueba.service.LoginService;
 
-import java.util.Objects;
+import javax.transaction.Transactional;
 
+@Transactional
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -23,41 +24,55 @@ public class LoginServiceImpl implements LoginService {
     AlumnoRepository alumnoRepository;
     @Autowired
     AdministratorRepository administratorRepository;
+
+
+
 //    @Autowired
 //    PasswordEncoder passwordEncoder;
 
 
 
     @Override
-    public ResponseEntity<?> register(String nombre, String apellido, String email, String password, String roleName) {
-        Profesor registerProfesor = new Profesor(nombre, apellido, email, password, "PROFESOR");
-        Alumno registerAlumno = new Alumno(nombre, apellido, email, password, "ALUMNO");
-        if (roleName.equals("PROFESOR")){
-            profesorRepository.save(registerProfesor);
+    public ResponseEntity<?> register(String nombre, String apellido, String email, int password, String roleName) {
+        Profesor registerProfesor = new Profesor(nombre, apellido, email, password, "profesor");
+        Alumno registerAlumno = new Alumno(nombre, apellido, email, password, "alumno");
+        if (roleName.equals("profesor")){
+           profesorRepository.save(registerProfesor);
+           return new ResponseEntity<>("Se a registrado correctamente", HttpStatus.ACCEPTED);
         }
-        if (roleName.equals("ALUMNO")){
+        if (roleName.equals("alumno")){
             alumnoRepository.save(registerAlumno);
+            return new ResponseEntity<>("Se a registrado correctamente", HttpStatus.ACCEPTED);
         }
 
-       return new ResponseEntity<>("Se a registrado correctamente", HttpStatus.ACCEPTED);
+       return new ResponseEntity<>("No se a registrado correctamente", HttpStatus.FORBIDDEN);
 
     }
 
+
+
     @Override
-    public ResponseEntity<?> login(String email, String password){
+    public ResponseEntity<?> login(String email, String password, String roleName) {
         Profesor profesor = profesorRepository.findByEmail(email);
         Alumno alumno = alumnoRepository.findByEmail(email);
         Administrator administrator = administratorRepository.findByEmail(email);
-        if(email.equals(alumno.getEmail()) && password.equals(alumno.getPassword())){
-          return new ResponseEntity<>("Se a registrado Correctamente", HttpStatus.OK);
+
+        if (roleName.equals("profesor")){
+            profesorRepository.save(profesor);
+            return new ResponseEntity<>("Se a registrado correctamente", HttpStatus.ACCEPTED);
         }
-        if(email.equals(administrator.getEmail()) && password.equals(administrator.getPassword())){
-            return new ResponseEntity<>("Se a registrado Correctamente", HttpStatus.OK);
+        if (roleName.equals("alumno")){
+            alumnoRepository.save(alumno);
+            return new ResponseEntity<>("Se a registrado correctamente", HttpStatus.ACCEPTED);
         }
-        if(email.equals(profesor.getEmail()) && password.equals(profesor.getPassword())){
-            return new ResponseEntity<>("Se a registrado Correctamente", HttpStatus.OK);
+        if (roleName.equals("admin")){
+            administratorRepository.save(administrator);
+            return new ResponseEntity<>("Se a registrado correctamente", HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>("Su email y password no pertenecen a una persona registrada", HttpStatus.BAD_REQUEST);
+
+
+           return new ResponseEntity<>("Su email y password no pertenecen a una persona registrada", HttpStatus.BAD_REQUEST);
+
     }
 
 }

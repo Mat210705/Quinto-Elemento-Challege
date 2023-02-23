@@ -1,6 +1,7 @@
 package quinto.elemento.prueba.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import quinto.elemento.prueba.dto.AlumnoDTO;
@@ -17,21 +18,21 @@ public class AlumnoController {
     AlumnoService alumnoService;
 
     @GetMapping(path = "/alumnos")
-    public List<Alumno> getAllProfesor(){
+    public List<Alumno> getAll(){
         return alumnoService.getAllAlumno();
     }
 
-    @GetMapping(path = "alumnos{nombre}")
-    public Alumno getAlumnoByName (@RequestParam String nombre){
-        return alumnoService.getAlumnoByName(nombre);
+    
+    @GetMapping(path = "alumno{email}")
+    public Alumno getAlumnoByEmail (@RequestParam String email){
+        return alumnoService.getAlumnoByEmail(email);
     }
-
-    @PostMapping(path = "/crear/alumno")
-    public ResponseEntity<?> createAlumno(@RequestBody AlumnoDTO alumnoDTO){
+    @PostMapping(path = "/crear/alumno",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public @ResponseBody ResponseEntity<?> createAlumno(AlumnoDTO alumnoDTO){
         return alumnoService.createAlumno(alumnoDTO);
     }
-    @PutMapping(path = "/editar/alumno")
-    public ResponseEntity<?> editarAlumno(@RequestParam int id,@RequestBody AlumnoDTO alumnoDTO){
+    @PutMapping(path = "/editar/alumno",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<?> editarAlumno(@RequestParam int id,AlumnoDTO alumnoDTO){
         return alumnoService.editarAlumno(id, alumnoDTO);
     }
     @DeleteMapping(path = "/eliminar/alumno")

@@ -11,7 +11,7 @@ import java.util.Set;
 
 
 @Entity
-public class Profesor{
+public class Profesor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
@@ -21,7 +21,7 @@ public class Profesor{
     private String nombre;
     private String apellido;
     private String email;
-    private String password;
+    private int password;
 
     private String roleName;
 
@@ -35,7 +35,7 @@ public class Profesor{
 
     }
 
-    public Profesor(String nombre, String apellido, String email, String password, String roleName) {
+    public Profesor(String nombre, String apellido, String email, int password, String roleName) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -96,11 +96,11 @@ public class Profesor{
         this.email = email;
     }
 
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(int password) {
         this.password = password;
     }
 

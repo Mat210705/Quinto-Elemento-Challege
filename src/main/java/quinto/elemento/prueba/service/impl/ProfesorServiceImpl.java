@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 import quinto.elemento.prueba.dto.ProfesorDTO;
 import quinto.elemento.prueba.model.Curso;
 import quinto.elemento.prueba.model.Profesor;
@@ -22,8 +23,7 @@ public class ProfesorServiceImpl implements ProfesorService {
     ProfesorRepository profesorRepository;
     @Autowired
     CursoRepository cursoRepository;
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public List<Profesor> getAllProfesor(){
@@ -35,9 +35,11 @@ public class ProfesorServiceImpl implements ProfesorService {
         return profesorRepository.findByNombre(nombre);
     }
 
+
+
     @Override
-    public ResponseEntity<?> createProfesor(ProfesorDTO profesorDTO) {
-            if (profesorDTO.getNombre().isEmpty()|| profesorDTO.getApellido().isEmpty()||profesorDTO.getEmail().isEmpty()|| profesorDTO.getPassword().isEmpty()){
+    public  ResponseEntity<?> createProfesor(ProfesorDTO profesorDTO) {
+            if (profesorDTO.getNombre().isEmpty()|| profesorDTO.getApellido().isEmpty()||profesorDTO.getEmail().isEmpty()){
                 return new ResponseEntity<>("Faltan datos para realizar la operacion", HttpStatus.FORBIDDEN);
             }
         Profesor newProfesor = new Profesor();

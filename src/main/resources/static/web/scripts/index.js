@@ -1,8 +1,10 @@
 const app = Vue.createApp({
     data() {
         return {
-            nombre: "",
-            apellido: "",
+            alumnos:[],
+            profesores:[],
+            nombre:"",
+            apellido:"",
             email:"",
             password:"",
             roleName:"",
@@ -13,24 +15,44 @@ const app = Vue.createApp({
         }
     },
     created() {
-        
+        this.loadAlumnos();
     },
     methods: {
-        
-     
-         crearUsuario(e){
-             e.preventDefault()            
-             axios.post('/api/register', `nombre=${this.nombre}&apellido=${this.apellido}&email=${this.email}&password=${this.password}&roleName=${this.roleName}`, { headers: {'content-type':'application/x-www-form-urlencoded'}})             
-             .then(res => window.location.href = ("/web/accounts.html"))
-           
-         },         
+
+         createUser(){
+             axios.post('/api/register',`nombre=${this.nombre}&apellido=${this.apellido}&email=${this.email}&password=${this.password}&roleName=${this.roleName}`)
+             .then(response => swal( 'Hola, '+`${this.nombre}`,
+             'Su cuenta se a creado con exito.',
+             'success'))
+             .then(() => {
+                axios.post('/api/login', `email=${this.email}&password=${this.password}`,{ headers: {'content-type':'application/x-www-form-urlencoded'}})
+                .then(res => window.location.href = ("/web/accounts.html"))
+             }) 
+         },    
+         
          loadData() {
-            axios.post('/api/login', `email=${this.email}&password=${this.password}`,{ headers: {'content-type':'application/x-www-form-urlencoded'}})
-            .then(res => console.log(res))
-            .then(res => window.location.href = ("/web/accounts.html"))
-            .catch(res => swal("Su Usuario y contraseña es Incorrecto","Intente nuevamente"))
+            axios.post('/api/login', `email=${this.email}&password=${this.password}&roleName=${this.roleName}`,{ headers: {'content-type':'application/x-www-form-urlencoded'}})
+            .then(response => { 
+                if (this.roleName === "alumno") { 
+                    window.location.href = ("/web/accountAlumno.html")
+                    this.alumnos =  axios.get('/api/alumno?email='+this.email)
+                    .then(response => {
+                        this.alumnos = response.data
+                       console.log(response.data)
+                        })
+                       
+                    
+                    } else if(this.roleName === "profesor"){
+                            window.location.href = ("/web/accountProfesor.html")
+                            } else{
+                                window.location.href = ("/web/accountAdmin.html")
+                                }  
+              })
+            
+            
+            .catch(response => swal("Su Usuario y contraseña es Incorrecto","Intente nuevamente"))
          },
-        
+           
          registroCliente(e){
             console.log(e.target)
             this.showModalRegistro = true;
@@ -52,4 +74,3 @@ const app = Vue.createApp({
 let consol = app.mount("#app")
 
 
-    

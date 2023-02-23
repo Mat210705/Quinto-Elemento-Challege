@@ -1,6 +1,7 @@
 package quinto.elemento.prueba.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import quinto.elemento.prueba.dto.CursoDTO;
@@ -22,17 +23,17 @@ public class CursoController {
         return cursoService.getAllCursos();
     }
 
-    @GetMapping(path = "/curso{nombre}")
+    @GetMapping(path = "/cursos{nombre}")
     public Curso getCursoByName(@RequestParam String nombre){
         return cursoService.getCursoByName(nombre);
     }
 
-    @PostMapping(path = "/crear/curso")
-    public ResponseEntity<?> createCurso(@RequestBody CursoDTO cursoDTO){
+    @PostMapping(path = "/crear/curso",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public @ResponseBody ResponseEntity<?> createCurso( CursoDTO cursoDTO){
         return cursoService.crearCurso(cursoDTO);
     }
-    @PutMapping(path = "/editar/curso")
-    public ResponseEntity<?> editarCurso(@RequestParam int id,@RequestBody CursoDTO cursoDTO){
+    @PutMapping(path = "/editar/curso",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public @ResponseBody ResponseEntity<?> editarCurso(@RequestParam int id, CursoDTO cursoDTO){
         return cursoService.editarCurso(id, cursoDTO);
     }
     @DeleteMapping(path = "/eliminar/curso")

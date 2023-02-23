@@ -38,8 +38,13 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
+    public Alumno getAlumnoByEmail(String email) {
+        return alumnoRepository.findByEmail(email);
+    }
+
+    @Override
     public ResponseEntity<?> createAlumno(AlumnoDTO alumnoDTO) {
-        if (alumnoDTO.getNombre().isEmpty()|| alumnoDTO.getApellido().isEmpty()||alumnoDTO.getEmail().isEmpty()|| alumnoDTO.getPassword().isEmpty()){
+        if (alumnoDTO.getNombre().isEmpty()|| alumnoDTO.getApellido().isEmpty()||alumnoDTO.getEmail().isEmpty()){
             return new ResponseEntity<>("Faltan datos para realizar la operacion", HttpStatus.FORBIDDEN);
         }
         Alumno newAlumno = new Alumno();

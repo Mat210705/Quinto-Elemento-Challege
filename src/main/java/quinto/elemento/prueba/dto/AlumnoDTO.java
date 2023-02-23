@@ -6,12 +6,12 @@ public class AlumnoDTO {
     private String nombre;
     private String apellido;
     private String email;
-    private String password;
+    private int password;
 
     public AlumnoDTO() {
     }
 
-    public AlumnoDTO(String nombre, String apellido, String email, String password) {
+    public AlumnoDTO(String nombre, String apellido, String email, int password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -51,11 +51,11 @@ public class AlumnoDTO {
         this.email = email;
     }
 
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(int password) {
         this.password = password;
     }
 }

@@ -15,4 +15,6 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Integer> {
     Profesor findByEmailAndPassword(String email, String password);
     Profesor findById(int id);
 
+
+
 }

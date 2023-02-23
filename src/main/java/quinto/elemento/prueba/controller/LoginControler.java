@@ -16,15 +16,15 @@ public class LoginControler {
     public ResponseEntity<?> register(
             @RequestParam String nombre, @RequestParam String apellido,
 
-            @RequestParam String email, @RequestParam String password,
+            @RequestParam String email, @RequestParam int password,
 
             @RequestParam String roleName){
 
         return loginService.register(nombre, apellido, email, password,roleName);
     }
     @RequestMapping(path = "/api/login", method = RequestMethod.POST)
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password){
-        return loginService.login(email, password);
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password, @RequestParam String roleName){
+        return loginService.login(email, password, roleName);
     }
 
 }

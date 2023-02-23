@@ -22,8 +22,7 @@ public class CursoDTO {
     private Profesor profesor;
 
 
-    public CursoDTO(Integer id, String nombre, String turno) {
-        this.id = id;
+    public CursoDTO( String nombre, String turno) {
         this.nombre = nombre;
         this.turno = turno;
     }

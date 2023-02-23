@@ -21,29 +21,31 @@ public class PruebaApplication {
 	private AlumnoRepository alumnoRepository;
 	@Autowired
 	private AdministratorRepository administratorRepository;
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(PruebaApplication.class, args);
 	}
 		@Bean
-		public CommandLineRunner initData() {
+		public CommandLineRunner commandLineRunner(ProfesorRepository profesorRepository, CursoRepository cursoRepository, AlumnoRepository alumnoRepository, AdministratorRepository administratorRepository ) {
 			return (args) -> {
 
-				Administrator administrator = new Administrator("Matias","Milich","Mat210705@gmail.com","1234", "ADMIN");
-				administratorRepository.save(administrator);
-				Profesor profesor1 = new Profesor("Matias", "Milich", "Mat123@gmail.com", "1234", "PROFESOR");
+				Administrator administrator1 = new Administrator("MatiasAdmin", "MilichAdmin","admin@gmail.com", "1234", "admin");
+				administratorRepository.save(administrator1);
+				Profesor profesor1 = new Profesor("Matias", "Milich", "Mat123@gmail.com", 1234,  "profesor");
 				profesorRepository.save(profesor1);
-				Alumno alumno = new Alumno("Milich", "Matias", "mat456@gmail.com","8976", "ALUMNO");
+				Alumno alumno = new Alumno("Milich", "Matias", "mat456@gmail.com",1234, "alumno");
 				alumnoRepository.save(alumno);
 				Curso javaInicial = new Curso("Java-Inicial", "tarde");
 				profesor1.addCursos(javaInicial);
+				profesor1.addAlumnos(alumno);
 				cursoRepository.save(javaInicial);
 				Curso javascriptInicial = new Curso("Javascript-Inicial", "Noche");
 				alumno.addCursos(javascriptInicial);
 				cursoRepository.save(javascriptInicial);
 				Curso sqlInicial = new Curso("Sql-Inicial", "Noche");
 				cursoRepository.save(sqlInicial);
+
 			};
 		}
 	}

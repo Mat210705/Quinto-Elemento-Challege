@@ -13,7 +13,7 @@ public interface AlumnoService {
     List<Alumno> getAllAlumno();
 
     Alumno getAlumnoByName(String nombre);
-
+    Alumno getAlumnoByEmail(String email);
     ResponseEntity<?> createAlumno(AlumnoDTO alumnoDTO);
 
     ResponseEntity editarAlumno(int id, AlumnoDTO alumnoDTO);

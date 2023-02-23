@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +17,11 @@
                 </div>
                 <div class="mb-4 mt-4">
                     <label for="password" class="form-label">Password</label> 
-                    <input v-model="password" id="password" type="t" placeholder="Introduzca su Password" class="form-control" required>
+                    <input v-model="password" id="number" type="t" placeholder="Introduzca su Password" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="roleName" class="form-label">Role Name</label> 
+                    <input v-model="roleName" id="roleName" type="text" placeholder="Introduzca su role" class="form-control" required>
                 </div>
                 <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
                     <button type="submit" @click="loadData" class="btn btn-success m-2">Iniciar Sesion</button>  
@@ -30,7 +33,7 @@
             <form class="formInicio mt-4 mb-4">
                 <div class="mb-4 mt-4">
                     <label for="nombre" class="form-label">Nombre</label> 
-                    <input v-model="nombre" id="nombre"  placeholder="Introduzca su Nombre" class="form-control" required>
+                    <input v-model="nombre" id="nombre" type="text" placeholder="Introduzca su Nombre" class="form-control" required>
                 </div>
                 <div class="mb-4 mt-4">
                     <label for="apellido" class="form-label">Apellido</label> 
@@ -42,15 +45,15 @@
                 </div>
                 <div class="mb-4 mt-4">
                     <label for="password" class="form-label">Password</label> 
-                    <input v-model="password"  type="password" placeholder="Introduzca su Password"  class="form-control" required> 
+                    <input v-model="password"  type="number" placeholder="Introduzca su Password"  class="form-control" required> 
                 </div>
                 <div class="mb-4 mt-4">
-                    <label for="roleName" class="form-label">Role</label> 
-                    <input v-model="roleName" id="roleName"  placeholder="Introduzca su role en mayusculas" class="form-control" required>
+                    <label for="roleName" class="form-label">Role Name</label> 
+                    <input v-model="roleName" id="roleName2" type="text" placeholder="Introduzca su role" class="form-control" required>
                 </div>
                 <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
-                    <button type="submit" @click="crearUsuario" class="btn btn-success m-2">Iniciar Sesion</button>
-                    <button type="button" @click="inicioCliente" class="btn btn-primary m-2">Volver inicio</button>                    
+                    <button type="submit" @click="createUser" class="btn btn-success m-2">Crear Usuario</button>
+                   
                 </div>
             </form>
         </div>

@@ -1,6 +1,7 @@
 package quinto.elemento.prueba.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import quinto.elemento.prueba.dto.ProfesorDTO;
@@ -26,12 +27,12 @@ public class ProfessorController {
         return profesorService.getProfesorByName(nombre);
     }
 
-    @PostMapping(path = "/crear/profesor")
-    public ResponseEntity<?> createProfesor(@RequestBody ProfesorDTO profesorDTO){
+    @PostMapping(path = "/crear/profesor",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public @ResponseBody ResponseEntity<?> createProfesor(ProfesorDTO profesorDTO){
         return profesorService.createProfesor(profesorDTO);
     }
-    @PutMapping(path = "/editar/profesor")
-    public ResponseEntity<?> editarProfesor(@RequestParam int id,@RequestBody ProfesorDTO profesorDTO){
+    @PutMapping(path = "/editar/profesor",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<?> editarProfesor(@RequestParam int id, ProfesorDTO profesorDTO){
         return profesorService.editarProfesor(id, profesorDTO);
     }
     @DeleteMapping(path = "/eliminar/profesor")
