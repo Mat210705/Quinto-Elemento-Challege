@@ -15,7 +15,7 @@ const app = Vue.createApp({
         }
     },
     created() {
-        this.loadAlumnos();
+        
     },
     methods: {
 
@@ -36,12 +36,6 @@ const app = Vue.createApp({
                 if (this.roleName === "alumno") { 
                     window.location.href = ("/web/accountAlumno.html")
                     this.alumnos =  axios.get('/api/alumno?email='+this.email)
-                    .then(response => {
-                        this.alumnos = response.data
-                       console.log(response.data)
-                        })
-                       
-                    
                     } else if(this.roleName === "profesor"){
                             window.location.href = ("/web/accountProfesor.html")
                             } else{
