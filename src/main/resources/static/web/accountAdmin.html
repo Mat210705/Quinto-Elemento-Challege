@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Administracion</title>
+</head>
+<body>
+    <main id="app">
+        <div class="container">
+            <h1>Panel de Alumnos</h1>
+            <div>
+                <ul v-for="alumno in alumnos">
+                    <li>
+                        id del Alumno: {{alumno.id}}
+                    </li>
+                    <li>
+                        Nombre: {{alumno.nombre}}
+                    </li>
+                    <li>                                    
+                        Apellido: {{alumno.apellido}}
+                    </li>
+                    <li>
+                        Email:{{alumno.email}}
+                    </li>  
+                    <li>
+                        password:{{alumno.password}}
+                    </li>
+                    <li>
+                        rol:{{alumno.roleName}}
+                    </li>
+                    <h6>Cursos</h6>
+                    <ul v-for="curso in profesores.cursos">
+                        <li>nombre: {{curso.nombre}}</li>
+                        <li>turno: {{curso.turno}}</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <h2>Crear alumno nuevo</h2>
+            <form class="container mt-4 mb-4">
+                
+                <div class="mb-4 mt-4">
+                    <label for="nombre" class="form-label">Nombre</label> 
+                    <input v-model="nombre" id="nombre" type="text" placeholder="Introduzca su Nombre" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="apellido" class="form-label">Apellido</label> 
+                    <input v-model="apellido" id="apellido"  placeholder="Introduzca su Apellido" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="email" class="form-label">Usuario/Correo</label> 
+                    <input v-model="email"  type="email" placeholder="Introduzca su Email" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="password" class="form-label">Password</label> 
+                    <input v-model="password"  type="number" placeholder="Introduzca su Password"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="roleName" class="form-label">Role Name</label> 
+                    <input v-model="roleName" id="roleName2" type="text" placeholder="Introduzca su role" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="crearAlumno" class="btn btn-success m-2">Crear Alumno</button>
+                </div>
+            </form>    
+        </div>    
+        <div class="container">
+            <h2>Editar un Alumno</h2>
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="id" class="form-label">id alumno</label> 
+                    <input v-model="id"  type="number" placeholder="Introduzca su id alumno"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="nombre" class="form-label">Nombre</label> 
+                    <input v-model="nombre" id="nombre" type="text" placeholder="Introduzca su Nombre" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="apellido" class="form-label">Apellido</label> 
+                    <input v-model="apellido" id="apellido"  placeholder="Introduzca su Apellido" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="email" class="form-label">Usuario/Correo</label> 
+                    <input v-model="email"  type="email" placeholder="Introduzca su Email" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="password" class="form-label">Password</label> 
+                    <input v-model="password"  type="number" placeholder="Introduzca su Password"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="roleName" class="form-label">Role Name</label> 
+                    <input v-model="roleName" id="roleName2" type="text" placeholder="Introduzca su role" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="editarAlumno" class="btn btn-success m-2">Editar Usuario</button>
+                </div>
+            </form>
+        </div>       
+        <div class="container"> 
+            <h2>Eliminar un Alumno</h2>
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="id" class="form-label">id</label> 
+                    <input v-model="id" id="number"  placeholder="Introduzca su id" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="deleteAlumno" class="btn btn-success m-2">Eliminar Usuario</button>
+                </div>
+            </form>  
+        </div>    
+        <div class="container">
+            <h2>Anotar Alumno a un curso</h2> 
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="id" class="form-label">id alumno</label> 
+                    <input v-model="id"  type="number" placeholder="Introduzca su id alumno"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="curso" class="form-label">Nombre del Curso</label> 
+                    <input v-model="curso"  type="text" placeholder="Introduzca el nombre del Curso"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="turno" class="form-label">Turno del Curso</label> 
+                    <input v-model="turno"  type="text" placeholder="Introduzca el turno del curso" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="anotarAlumnoACurso" class="btn btn-success m-2">Anotar Usuario Usuario</button>
+                </div>
+            </form>  
+        </div> 
+        <div class="container">
+            <h1>Panel de Profesores</h1>
+            <div>
+                <ul v-for="profesor in profesores">
+                    <li>
+                        id del Profesor: {{profesor.id}}
+                    </li>
+                    <li>
+                        Nombre: {{profesor.nombre}}
+                    </li>
+                    <li>                                    
+                        Apellido: {{profesor.apellido}}
+                    </li>
+                    <li>
+                        Email:{{profesor.email}}
+                    </li>  
+                    <li>
+                        password:{{profesor.password}}
+                    </li>
+                    <li>
+                        rol:{{profesor.roleName}}
+                    </li>
+                    <h6>Cursos</h6>
+                    <ul v-for="curso in profesores.cursos">
+                        <li>nombre: {{curso.nombre}}</li>
+                        <li>turno: {{curso.turno}}</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>   
+        <div class="container">
+            <h2>Crear Profesor nuevo</h2>
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="nombre" class="form-label">Nombre</label> 
+                    <input v-model="nombre" id="nombre" type="text" placeholder="Introduzca su Nombre" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="apellido" class="form-label">Apellido</label> 
+                    <input v-model="apellido" id="apellido"  placeholder="Introduzca su Apellido" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="email" class="form-label">Usuario/Correo</label> 
+                    <input v-model="email"  type="email" placeholder="Introduzca su Email" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="password" class="form-label">Password</label> 
+                    <input v-model="password"  type="number" placeholder="Introduzca su Password"  class="form-control" required> 
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="crearProfesor" class="btn btn-success m-2">Crear Profesor</button>
+                </div>
+            </form>    
+        </div>   
+   
+        <div class="container">
+            <h2>Editar un Profesor</h2>
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="id" class="form-label">id profesor</label> 
+                    <input v-model="id"  type="number" placeholder="Introduzca su id profesor"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="nombre" class="form-label">Nombre</label> 
+                    <input v-model="nombre" id="nombre" type="text" placeholder="Introduzca su Nombre" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="apellido" class="form-label">Apellido</label> 
+                    <input v-model="apellido" id="apellido"  placeholder="Introduzca su Apellido" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="email" class="form-label">Usuario/Correo</label> 
+                    <input v-model="email"  type="email" placeholder="Introduzca su Email" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="password" class="form-label">Password</label> 
+                    <input v-model="password"  type="number" placeholder="Introduzca su Password"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="roleName" class="form-label">Role Name</label> 
+                    <input v-model="roleName" id="roleName2" type="text" placeholder="Introduzca su role" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="editarProfesor" class="btn btn-success m-2">Editar Usuario</button>
+                </div>
+            </form>
+        </div>   
+        <div class="container"> 
+            <h2>Eliminar un Profesor</h2>
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="id" class="form-label">id</label> 
+                    <input v-model="id" id="number"  placeholder="Introduzca su id" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="deleteProfesor" class="btn btn-success m-2">Eliminar Usuario</button>
+                </div>
+            </form>  
+        </div>
+        <div class="container">
+            <h2>Asignar Profesor a un curso</h2> 
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="id" class="form-label">id profesor</label> 
+                    <input v-model="id"  type="number" placeholder="Introduzca su id Profesor"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="curso" class="form-label">Nombre del Curso</label> 
+                    <input v-model="curso"  type="text" placeholder="Introduzca el nombre del Curso"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="turno" class="form-label">Turno del Curso</label> 
+                    <input v-model="turno"  type="text" placeholder="Introduzca el turno del Curso" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="AsignarACurso" class="btn btn-success m-2">Anotar Usuario Usuario</button>
+                </div>
+            </form>  
+        </div>   
+        <div class="container">
+            <h1>Panel de Cursos</h1>
+            <div>
+                <ul v-for="curso in cursos">
+                    <li>
+                        id del curso: {{curso.id}}
+                    </li>
+                    <li>
+                        Nombre: {{curso.nombre}}
+                    </li>
+                    <li>                                    
+                        Turno: {{curso.turno}}
+                    </li>
+                    
+                </ul>
+            </div>
+        </div> 
+        <div class="container">
+            <h2>Crear Curso nuevo</h2>
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="curso" class="form-label">Nombre</label> 
+                    <input v-model="curso" id="curso" type="text" placeholder="Introduzca Nombre del curso" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="turno" class="form-label">turno</label> 
+                    <input v-model="turno" id="turno"  placeholder="Introduzca el turno" class="form-control" required>
+                </div>
+            
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="crearCurso" class="btn btn-success m-2">Crear curso</button>
+                </div>
+            </form>    
+        </div>   
+   
+        <div class="container">
+            <h2>Editar un Curso</h2>
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="id" class="form-label">id curso</label> 
+                    <input v-model="id"  type="number" placeholder="Introduzca id del curso"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="curso" class="form-label">Nombre</label> 
+                    <input v-model="curso" id="curso" type="text" placeholder="Introduzca nombre del curso" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="turno" class="form-label">Turno</label> 
+                    <input v-model="turno" id="turno"  placeholder="Introduzca turno del curso" class="form-control" required>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="editarCurso" class="btn btn-success m-2">Editar curso</button>
+                </div>
+            </form>
+        </div>   
+        <div class="container"> 
+            <h2>Eliminar un curso</h2>
+            <form class="container mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="id" class="form-label">id</label> 
+                    <input v-model="id" id="number"  placeholder="Introduzca id del curso" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="deleteCurso" class="btn btn-success m-2">Eliminar curso</button>
+                </div>
+            </form>  
+        </div>  
+    </main>     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./scripts/accountAdmin.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Login</title>
+</head>
+<body>
+    <main class="form" id="app">
+        <div class="container col-4 mt-4 mb-4 animate__animated animate__backInDown" v-show="showModalIniciarSesion">        
+            <div class="formInicio mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="email" class="form-label">Usuario/Correo</label> 
+                    <input v-model="email" id="email" type="email" placeholder="Introduzca su Email" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="password" class="form-label">Password</label> 
+                    <input v-model="password" id="number" type="t" placeholder="Introduzca su Password" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="roleName" class="form-label">Role Name</label> 
+                    <input v-model="roleName" id="roleName" type="text" placeholder="Introduzca su role" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="loadData" class="btn btn-success m-2">Iniciar Sesion</button>  
+                    <button type="button" @click="registroCliente" class="btn btn-primary m-2">Crear Cuenta</button>                  
+                </div>
+            </div>
+        </div>
+        <div class="container col-4 mt-4 animate__animated animate__backInDown" v-show="showModalRegistro">
+            <form class="formInicio mt-4 mb-4">
+                <div class="mb-4 mt-4">
+                    <label for="nombre" class="form-label">Nombre</label> 
+                    <input v-model="nombre" id="nombre" type="text" placeholder="Introduzca su Nombre" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="apellido" class="form-label">Apellido</label> 
+                    <input v-model="apellido" id="apellido"  placeholder="Introduzca su Apellido" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="email" class="form-label">Usuario/Correo</label> 
+                    <input v-model="email"  type="email" placeholder="Introduzca su Email" class="form-control" required>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="password" class="form-label">Password</label> 
+                    <input v-model="password"  type="number" placeholder="Introduzca su Password"  class="form-control" required> 
+                </div>
+                <div class="mb-4 mt-4">
+                    <label for="roleName" class="form-label">Role Name</label> 
+                    <input v-model="roleName" id="roleName2" type="text" placeholder="Introduzca su role" class="form-control" required>
+                </div>
+                <div class="inicioSesion mb-4 mt-4 d-flex justify-content-around">
+                    <button type="submit" @click="createUser" class="btn btn-success m-2">Crear Usuario</button>
+                   
+                </div>
+            </form>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="scripts/index.js"></script>
+</body>
+</html>
